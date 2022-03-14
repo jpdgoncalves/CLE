@@ -22,7 +22,7 @@ void process_line(const char *data, const size_t data_size, measurements *out) {
         utf8_char = utf8iter_next_char(&iter);
 
         if (!in_word) {
-            if(is_alphanumeric(utf8_char)) {
+            if(is_alphanumeric(utf8_char) || utf8_char == '_') {
                 in_word = true;
                 out->n_words++;
 
@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
             process_line(line_buffer, (size_t) line_size, &m);
         }
 
-        printf("Measurements for %s\n", filename);
+        printf("\nMeasurements for %s\n", filename);
         printf("Number of words %lu\n", m.n_words);
         printf("Number of words that start with vowel %lu\n", m.n_words_start_vowel);
         printf("Number of words that start with consonant %lu\n", m.n_words_end_cons);

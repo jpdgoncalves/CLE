@@ -84,7 +84,8 @@ bool is_consonant(uint32_t utf8_char) {
 bool is_separator(uint32_t utf8_char) {
 
     return (utf8_char == '-') || (utf8_char == '\"') || (utf8_char == 0xe2809c) || (utf8_char == 0xe2809d) || \
-           (utf8_char == '[') || (utf8_char == ']') || (utf8_char == ')') || (utf8_char == '(');
+           (utf8_char == '[') || (utf8_char == ']') || (utf8_char == ')') || (utf8_char == '(') || \
+           (utf8_char == 0xc2ab) || (utf8_char == 0xc2bb);
 }
 
 bool is_punctuation(uint32_t utf8_char) {
