@@ -73,7 +73,7 @@ int main(int argc, char **argv) {
     for (int i = 0; i < argc; i++) {
 
         const char *filename = argv[i];
-        const FILE *filehandle = fopen(filename, "r");
+        FILE *filehandle = fopen(filename, "r");
 
         if (filehandle == NULL) {
             printf("Could not open file '%s'. Skipping\n", filename);
@@ -82,8 +82,8 @@ int main(int argc, char **argv) {
 
         printf("\n\n\nDeterminants for file '%s'\n\n", filename);
 
-        const int n_matrices = 0;
-        const int order_matrices = 0;
+        int n_matrices = 0;
+        int order_matrices = 0;
 
         fread(&n_matrices, sizeof(int), 1, filehandle);
         fread(&order_matrices, sizeof(int), 1, filehandle);
