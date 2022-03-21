@@ -106,7 +106,7 @@ int main(int argc, char **argv) {
             double determinant = calculate_determinant(&mat);
 
             mat_index++;
-            printf("Determinant for matrix %d is %e.\n", mat_index, determinant);
+            printf("Determinant for matrix %d is %11.3e.\n", mat_index, determinant);
         }
     }
 
