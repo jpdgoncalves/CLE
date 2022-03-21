@@ -24,7 +24,7 @@ typedef struct matrix
  * @brief Macro to define a square matrix
  * 
  */
-#define SQUARE_MATRIX(size, data) {size, size, data};
+#define SQUARE_MATRIX(order, data) {order, order, data};
 
 /**
  * @brief Gets the value at the specified row and column.

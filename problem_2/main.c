@@ -48,7 +48,7 @@ static double calculate_determinant(matrix *mat) {
 
     // This loop will transform any
     // square matrix into a triangular matrix.
-    for (size_t i = 0; i < n_rows; i++) {
+    for (size_t i = 0; i < n_rows - 1; i++) {
         if (matrix_get_value(mat, i, i) == 0) {
             if (try_swap_row_with_non_zero(mat, i)) {
                 signal = -1 * signal;
@@ -56,7 +56,6 @@ static double calculate_determinant(matrix *mat) {
                 return 0;
             }
         }
-
         // Subtract from all the rows below i, the ith row
         // In such a way that the ith element of all the rows below i
         // is 0.
@@ -67,10 +66,11 @@ static double calculate_determinant(matrix *mat) {
     return signal * calculate_det_triang_mat(mat);
 }
 
+
 int main(int argc, char **argv) {
 
     // For each of the filenames in argv
-    for (int i = 0; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
 
         const char *filename = argv[i];
         FILE *filehandle = fopen(filename, "r");
@@ -85,8 +85,14 @@ int main(int argc, char **argv) {
         int n_matrices = 0;
         int order_matrices = 0;
 
-        fread(&n_matrices, sizeof(int), 1, filehandle);
-        fread(&order_matrices, sizeof(int), 1, filehandle);
+        if (fread(&n_matrices, sizeof(int), 1, filehandle) == -1 ||
+            fread(&order_matrices, sizeof(int), 1, filehandle) == -1
+        ) {
+            printf("Unable to read number and size of the matrices. Skipping\n");
+        }
+
+        printf("Number of matrices: %d\n", n_matrices);
+        printf("Order of the matrices: %d\n", order_matrices);
 
         // Allocate data for the matrices in question
         size_t data_size = order_matrices * order_matrices;
@@ -95,13 +101,12 @@ int main(int argc, char **argv) {
 
         //This will ensure we will read the exact amount of bytes
         //We are supposed to read
-        while(fread(data, sizeof(double), data_size, filehandle) == data_size * sizeof(double)) {
-            matrix mat = SQUARE_MATRIX(data_size, data);
+        while(fread(data, sizeof(double), data_size, filehandle) == data_size) {
+            matrix mat = SQUARE_MATRIX(order_matrices, data);
             double determinant = calculate_determinant(&mat);
 
-            printf("Determinant for matrix %d is %f.\n", mat_index, determinant);
-
             mat_index++;
+            printf("Determinant for matrix %d is %e.\n", mat_index, determinant);
         }
     }
 
