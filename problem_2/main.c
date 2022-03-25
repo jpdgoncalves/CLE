@@ -5,6 +5,7 @@
 #include <unistd.h>
 #include <getopt.h>
 #include <string.h>
+#include <time.h>
 #include "matrix.h"
 
 /**
@@ -71,6 +72,10 @@ static double calculate_determinant(matrix *mat) {
 }
 
 static void process_file(const char *filename) {
+
+    double t0, t1, t2; /* time limits */
+    t2 = 0.0;
+
     FILE *filehandle = fopen(filename, "r");
 
     if (filehandle == NULL) {
@@ -100,12 +105,21 @@ static void process_file(const char *filename) {
     // This will ensure we will read the exact amount of bytes
     // We are supposed to read
     while (fread(data, sizeof(double), data_size, filehandle) == data_size) {
+
+        t0 = ((double) clock ()) / CLOCKS_PER_SEC;
+
         matrix mat = SQUARE_MATRIX(order_matrices, data);
         double determinant = calculate_determinant(&mat);
+
+        t1 = ((double) clock ()) / CLOCKS_PER_SEC;
+        t2 += t1 - t0;
 
         mat_index++;
         printf("Determinant for matrix %d is %11.3e.\n", mat_index, determinant);
     }
+    fclose(filehandle);
+
+    printf ("\nElapsed time = %.6f s\n", t2);
 }
 
 
