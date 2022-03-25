@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include "utf8iter.h"
 #include "utf8.h"
+#include <time.h>
 
 typedef struct measurements {
     size_t n_words;
@@ -14,7 +15,8 @@ typedef struct measurements {
 void process_line(const char *data, const size_t data_size, measurements *out) {
     uint32_t utf8_char = 0; // The current utf8 character.
     uint32_t prev_utf8_char = 0; // The previous utf8 character.
-    utf8iter iter = UTF8ITER(data, data_size); // Iterator of utf8 characters.
+    unsigned char* new_data = (unsigned char*) (data);//cast from char to unsigned char
+    utf8iter iter = UTF8ITER(new_data, data_size); // Iterator of utf8 characters.
     bool in_word = false; // Flag to detected whether we are inside a word or not.
     
     while (!UTF8ITER_REACHED_END(&iter)) {
@@ -45,14 +47,22 @@ void process_line(const char *data, const size_t data_size, measurements *out) {
 
 int main(int argc, char **argv) {
 
+    double t0, t1, t2;
+    t2 = 0.0;
+
     for (int i = 1; i < argc; i++) {
         const char *filename = argv[i];
-        FILE *f = fopen(filename, "r");
+        FILE *f = fopen(filename, "r");      
 
         if (f == NULL) {
             printf("Couldn't open file '%s'. Skipping\n", filename);
             continue;
         }
+
+        t0 = ((double) clock ()) / CLOCKS_PER_SEC;
+
+        
+
 
         // Loop through the file one line at a time
         // And for each line determine the number of words,
@@ -66,14 +76,21 @@ int main(int argc, char **argv) {
             process_line(line_buffer, (size_t) line_size, &m);
         }
 
+        t1 = ((double) clock ()) / CLOCKS_PER_SEC;
+        t2 += t1 - t0;
+
+
+        free(line_buffer);
+        fclose(f);
+
         printf("\nMeasurements for %s\n", filename);
         printf("Number of words %lu\n", m.n_words);
         printf("Number of words that start with vowel %lu\n", m.n_words_start_vowel);
         printf("Number of words that start with consonant %lu\n", m.n_words_end_cons);
 
-        free(line_buffer);
-        fclose(f);
     }
+
+    printf ("\nElapsed time = %.6f s\n", t2);
 
     // const char *str = "Por favor, eu quero ir para casa hoje! Tenho de ir á caça!!";
     // size_t size = strlen(str);
