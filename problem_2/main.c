@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <libgen.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <string.h>
+#include <time.h>
 #include "matrix.h"
 
 /**
@@ -66,49 +71,111 @@ static double calculate_determinant(matrix *mat) {
     return signal * calculate_det_triang_mat(mat);
 }
 
+static void process_file(const char *filename) {
 
-int main(int argc, char **argv) {
+    double t0, t1, t2; /* time limits */
+    t2 = 0.0;
 
-    // For each of the filenames in argv
-    for (int i = 1; i < argc; i++) {
+    FILE *filehandle = fopen(filename, "r");
 
-        const char *filename = argv[i];
-        FILE *filehandle = fopen(filename, "r");
+    if (filehandle == NULL) {
+        printf("Could not open file '%s'. Skipping\n", filename);
+        return;
+    }
 
-        if (filehandle == NULL) {
-            printf("Could not open file '%s'. Skipping\n", filename);
-            continue;
-        }        
+    printf("\n\n\nDeterminants for file '%s'\n\n", filename);
 
-        printf("\n\n\nDeterminants for file '%s'\n\n", filename);
+    int n_matrices = 0;
+    int order_matrices = 0;
 
-        int n_matrices = 0;
-        int order_matrices = 0;
+    if (fread(&n_matrices, sizeof(int), 1, filehandle) == -1 ||
+        fread(&order_matrices, sizeof(int), 1, filehandle) == -1)
+    {
+        printf("Unable to read number and size of the matrices. Skipping\n");
+    }
 
-        if (fread(&n_matrices, sizeof(int), 1, filehandle) == -1 ||
-            fread(&order_matrices, sizeof(int), 1, filehandle) == -1
-        ) {
-            printf("Unable to read number and size of the matrices. Skipping\n");
-        }
+    printf("Number of matrices: %d\n", n_matrices);
+    printf("Order of the matrices: %d\n", order_matrices);
 
-        printf("Number of matrices: %d\n", n_matrices);
-        printf("Order of the matrices: %d\n", order_matrices);
+    // Allocate data for the matrices in question
+    size_t data_size = order_matrices * order_matrices;
+    double data[data_size];
+    int mat_index = 0;
 
-        // Allocate data for the matrices in question
-        size_t data_size = order_matrices * order_matrices;
-        double data[data_size];
-        int mat_index = 0;
+    // This will ensure we will read the exact amount of bytes
+    // We are supposed to read
+    while (fread(data, sizeof(double), data_size, filehandle) == data_size) {
 
-        //This will ensure we will read the exact amount of bytes
-        //We are supposed to read
-        while(fread(data, sizeof(double), data_size, filehandle) == data_size) {
-            matrix mat = SQUARE_MATRIX(order_matrices, data);
-            double determinant = calculate_determinant(&mat);
+        t0 = ((double) clock ()) / CLOCKS_PER_SEC;
 
-            mat_index++;
-            printf("Determinant for matrix %d is %11.3e.\n", mat_index, determinant);
+        matrix mat = SQUARE_MATRIX(order_matrices, data);
+        double determinant = calculate_determinant(&mat);
+
+        t1 = ((double) clock ()) / CLOCKS_PER_SEC;
+        t2 += t1 - t0;
+
+        mat_index++;
+        printf("Determinant for matrix %d is %11.3e.\n", mat_index, determinant);
+    }
+    fclose(filehandle);
+
+    printf ("\nElapsed time = %.6f s\n", t2);
+}
+
+
+static void print_usage(const char *cmd_name) {
+    fprintf(stderr, "\nSynopsis: %s OPTIONS\n", cmd_name);
+    fprintf(stderr, "  OPTIONS:\n");
+    fprintf(stderr, "  -h        --- print this message\n");
+    fprintf(stderr, "  -f        --- the name of the file containing the matrices\n");
+}
+
+
+int main(int argc, char *argv[]) {
+
+    int opt;
+    char *filename = NULL;
+
+    while((opt = getopt(argc, argv, ":f:h")) != -1) {
+
+        switch (opt) {
+        case 'h': // Help option
+            print_usage(basename(argv[0]));
+            return EXIT_SUCCESS;
+        
+        case 'f': // File to process option
+            filename = malloc(sizeof(char) * strlen(optarg) + 1); // +1 is for the null terminator character
+            if (filename == NULL) {
+                fprintf(stderr, "%s: Unable to allocate memory for filename\n", basename(argv[0]));
+                return EXIT_FAILURE;
+            }
+            strcpy(filename, optarg);
+            break;
+        
+        case '?': // Invalid option
+            fprintf(stderr, "%s: Invalid option\n", basename(argv[0]));
+            print_usage(basename(argv[0]));
+            return EXIT_FAILURE;
+
+        case ':': // Missing argument for option
+            fprintf(stderr, "%s: File to process was not specified\n", basename(argv[0]));
+            print_usage(basename(argv[0]));
+            return EXIT_FAILURE;
         }
     }
 
+    if (filename == NULL) {
+        fprintf(stderr, "%s: File to process was not specified\n", basename(argv[0]));
+        print_usage(basename(argv[0]));
+        return EXIT_FAILURE;
+    }
+    
+    process_file(filename);
+
+    // For each of the filenames in argv
+    // for (int i = 1; i < argc; i++) {
+    //     char *filename = argv[i];
+    //     process_file(filename);
+    // }
     return 0;
 }
