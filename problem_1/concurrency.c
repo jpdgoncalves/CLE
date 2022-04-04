@@ -3,10 +3,16 @@
 #include "concurrency.h"
 
 /**
+ * @brief Number of threads to be processed. 
+ * 
+ */
+static size_t n_threads;
+
+/**
  * @brief Exit status of the threads.
  * 
  */
-int *threads_status;
+static int *threads_status;
 
 /**
  * @brief Mutex that controls access to the data read from the files
@@ -36,7 +42,7 @@ static size_t n_files_processed;
  * @brief Name of the files to be processed
  * 
  */
-static char **fileNames;
+static char **file_names;
 
 /**
  * @brief List of results for the each of the files 
@@ -45,7 +51,7 @@ static char **fileNames;
 static measurements *results;
 
 
-void initialize(size_t n_files, char **file_names) {
+void initialize(size_t n_files, char **file_names, size_t n_threads) {
 
 }
 
@@ -61,5 +67,5 @@ void submit_results(int thread_id, int file_id, measurements *results) {
 
 
 void get_final_results(bool *sucess_out, int *threads_status_out, measurements **results_out) {
-    
+
 }

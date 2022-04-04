@@ -29,9 +29,10 @@ typedef struct measurements {
  * @brief Function used to initialize the shared region variables.
  * 
  * @param n_files 
- * @param file_names 
+ * @param file_names
+ * @param n_threads 
  */
-void initialize(size_t n_files, char **file_names);
+void initialize(size_t n_files, char **file_names, size_t n_threads);
 
 
 /**
