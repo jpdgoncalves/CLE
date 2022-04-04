@@ -21,7 +21,7 @@ typedef struct utf8iter {
     size_t _pointer;
 } utf8iter;
 
-#define UTF8ITER(line, line_size) {line, line_size, 0};
+#define UTF8ITER(line, line_size) {(line), (line_size), 0};
 #define UTF8ITER_REACHED_END(iter) ((iter)->_pointer >= (iter)->size) // Determine if we reached the end of the iterator.
 
 /**

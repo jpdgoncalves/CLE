@@ -15,8 +15,7 @@ typedef struct measurements {
 void process_line(const char *data, const size_t data_size, measurements *out) {
     uint32_t utf8_char = 0; // The current utf8 character.
     uint32_t prev_utf8_char = 0; // The previous utf8 character.
-    unsigned char* new_data = (unsigned char*) (data);//cast from char to unsigned char
-    utf8iter iter = UTF8ITER(new_data, data_size); // Iterator of utf8 characters.
+    utf8iter iter = UTF8ITER((unsigned char*) data, data_size); // Iterator of utf8 characters.
     bool in_word = false; // Flag to detected whether we are inside a word or not.
     
     while (!UTF8ITER_REACHED_END(&iter)) {
