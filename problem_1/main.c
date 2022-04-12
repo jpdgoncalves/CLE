@@ -2,15 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
-#include "utf8iter.h"
-#include "utf8.h"
 #include <time.h>
 
-typedef struct measurements {
-    size_t n_words;
-    size_t n_words_start_vowel;
-    size_t n_words_end_cons;
-} measurements;
+#include "utf8iter.h"
+#include "utf8.h"
+#include "concurrency.h"
+
 
 void process_line(const char *data, const size_t data_size, measurements *out) {
     uint32_t utf8_char = 0; // The current utf8 character.
