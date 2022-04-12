@@ -80,7 +80,7 @@ void submit_results(int thread_id, int file_id, measurements *results) {
 }
 
 
-void get_final_results(bool *sucess_out, int *threads_status_out, measurements **results_out) {
+void get_final_results(bool *sucess_out, int *threads_status_out, measurements *results_out) {
 
 }
 

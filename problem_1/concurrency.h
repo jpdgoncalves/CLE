@@ -61,7 +61,7 @@ void submit_results(int thread_id, int file_id, measurements *results);
  * @brief Get results from the processing including whether there were any errors and on which threads
  * 
  */
-void get_final_results(bool *sucess_out, int *threads_status_out, measurements **results_out);
+void get_final_results(bool *sucess_out, int *threads_status_out, measurements *results_out);
 
 /**
  * @brief Cleans up the memory region after being used. This function should only be called
