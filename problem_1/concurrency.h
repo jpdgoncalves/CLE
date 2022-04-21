@@ -24,6 +24,19 @@ typedef struct measurements {
     size_t n_words_end_cons;
 } measurements;
 
+/**
+ * @brief Expected minimum size that will be read into the data output buffer
+ * for get_data_portion()
+ * 
+ */
+#define EXPECTED_MINIMUM_READ_SIZE = 512;
+
+/**
+ * @brief Advised size for the data output buffer used to get data from
+ * get_data_portion()
+ * 
+ */
+#define SUGGESTED_BUFFER_SIZE = EXPECTED_MINIMUM_READ_SIZE * 2;
 
 /**
  * @brief Function used to initialize the shared region variables.
@@ -32,7 +45,7 @@ typedef struct measurements {
  * @param file_names
  * @param n_threads 
  */
-void initialize(size_t n_files, char **file_names, size_t n_threads);
+void initialize(const size_t n_files, char **file_names, const size_t n_threads);
 
 
 /**
@@ -54,14 +67,14 @@ bool get_data_portion(int thread_id, int *file_id_out, char *data_out, size_t *d
  * @param file_id 
  * @param results 
  */
-void submit_results(int thread_id, int file_id, measurements *results);
+void submit_results( const int thread_id, const int file_id, const measurements *results);
 
 
 /**
  * @brief Get results from the processing including whether there were any errors and on which threads
  * 
  */
-void get_final_results(bool *sucess_out, int *threads_status_out, measurements *results_out);
+void get_final_results(bool *sucess_out, int **threads_status_out, measurements **results_out);
 
 /**
  * @brief Cleans up the memory region after being used. This function should only be called
