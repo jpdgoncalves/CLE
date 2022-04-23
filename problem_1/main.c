@@ -135,10 +135,12 @@ int main(int argc, char *argv[]) {
     pthread_t threads[number_of_threads];
     int thread_ids[number_of_threads];
 
+    struct timespec start, finish;
     bool threads_success = false;
     int *threads_status;
     measurements *results;
 
+    clock_gettime (CLOCK_MONOTONIC_RAW, &start); 
     initialize((size_t) number_of_files, file_names, (size_t) number_of_threads);
 
     for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
@@ -181,8 +183,9 @@ int main(int argc, char *argv[]) {
     }
 
     cleanup();
+    clock_gettime (CLOCK_MONOTONIC_RAW, &finish); 
 
-    printf("\nElapsed time = (TODO)\n");
+    printf ("\nElapsed tim = %.6f s\n",  (finish.tv_sec - start.tv_sec) / 1.0 + (finish.tv_nsec - start.tv_nsec) / 1000000000.0);
 
     return 0;
 }
