@@ -7,120 +7,19 @@
 #include <string.h>
 #include <time.h>
 #include <pthread.h>
-#include <math.h>
 #include "matrix.h"
 
+//lock access to read a matrix
+static pthread_mutex_t getMatrix = PTHREAD_MUTEX_INITIALIZER;
 
+//lock access to add time
+static pthread_mutex_t addTime = PTHREAD_MUTEX_INITIALIZER;
 
+//lock access to add result
+static pthread_mutex_t addResult = PTHREAD_MUTEX_INITIALIZER;
 
-int * threadStatus;
-pthread_mutex_t accessDataLock;
-pthread_mutex_t accessResultsLock;
-
-FILE *filehandle; 
-int n_matrices = 0;
-int order_matrices = 0;
-int mat_index = 0;
-
-int nProcessed = 0;
-
-int count = 0;
-
-//measurements * results;
-
-
-int getData (int id) {
-
-    // Allocate data for the matrices in question
-    size_t data_size = order_matrices * order_matrices;
-    double data[data_size];
-    
-
-    // This will ensure we will read the exact amount of bytes
-    // We are supposed to read
-
-
-    matrix mat = SQUARE_MATRIX(order_matrices, data);
-    mat_index ++;
-
-}
-
-static void *worker (void *par)
-{
-  unsigned int id = *((unsigned int *) par),                                                          /* consumer id */
-               val;                                                                                /* produced value */
-  int i;
-  
-  getData(id);
-  //meter lock
-  nProcessed ++;                                                                                        /* counting variable */
-
-    
-                                                                      
-
-
-  threadStatus[id] = EXIT_SUCCESS;
-  pthread_exit (&threadStatus[id]);
-}
-
-
-
-void initialize(int N){ //N is nr of Threads
-
-    printf("me");
-    
-    pthread_t tIdWork[N];                                                        /* workers internal thread id array */
-    unsigned int work[N];                                             /* workers application defined thread id array */
-    int i;                                                                                        /* counting variable */
-    int *status_p;                                                                      /* pointer to execution status */
-
-    /* initializing the application defined thread id arrays for the producers and the consumers and the random number
-     generator */
-
-    
-
-
-    for (i = 0; i < N; i++)
-        work[i] = i;
-    
-    
-
-    /* generation of intervening entities threads */
-
-  
-    for (i = 0; i < N; i++)
-    { if (pthread_create (&tIdWork[i], NULL, worker, &work[i]) != 0)                                   /* thread producer */
-        { perror ("error on waiting for thread producer");
-            exit (EXIT_FAILURE);
-        }
-    }
-
-    
-
-    /* waiting for the termination of the intervening entities threads */
-
-    printf ("\nFinal report\n");
-    for (i = 0; i < N; i++)
-    { if (pthread_join (tIdWork[i], (void *) &status_p) != 0)                                       /* thread producer */
-        { perror ("error on waiting for thread producer");
-            exit (EXIT_FAILURE);
-        }
-        printf ("thread producer, with id %u, has terminated: ", i);
-        printf ("its status was %d\n", *status_p);
-    }
-
-
-}
-
-
-int submitResults(){
-
-}
-
-
-
-
-
+//elapsed time
+double elapsedTime;
 
 
 
@@ -187,14 +86,61 @@ static double calculate_determinant(matrix *mat) {
     return signal * calculate_det_triang_mat(mat);
 }
 
-void open_file(const char *filename){
-    filehandle = fopen(filename, "r");
+double calculateMatrix(FILE *filehandle, int order_matrices, double data[], int index, double result []){
+
+    //calculate determinant    
+    double t0 = ((double) clock ()) / CLOCKS_PER_SEC;
+
+    matrix mat = SQUARE_MATRIX(order_matrices, data);
+    double determinant = calculate_determinant(&mat);
+
+    double t1 = ((double) clock ()) / CLOCKS_PER_SEC;
+    double t2 = t1 - t0;
+
+    //lock
+    pthread_mutex_lock(&addTime);
+
+    //add time
+    elapsedTime += t2;
+
+    //unlock
+    pthread_mutex_unlock(&addTime);
+
+    //lock
+    pthread_mutex_lock(&addResult);
+
+    //add result
+    result [index] = determinant;
+
+    //unlock
+    pthread_mutex_unlock(&addResult);
+
+
+
+    return determinant;
+}
+
+
+
+static void process_file(const char *filename) {
+
+    elapsedTime = 0.0;
+
+    //read file
+    FILE *filehandle = fopen(filename, "r");
 
     if (filehandle == NULL) {
         printf("Could not open file '%s'. Skipping\n", filename);
         return;
     }
+
+    
+    
+
     printf("\n\n\nDeterminants for file '%s'\n\n", filename);
+
+    int n_matrices = 0;
+    int order_matrices = 0;
 
     if (fread(&n_matrices, sizeof(int), 1, filehandle) == -1 ||
         fread(&order_matrices, sizeof(int), 1, filehandle) == -1)
@@ -205,16 +151,45 @@ void open_file(const char *filename){
     printf("Number of matrices: %d\n", n_matrices);
     printf("Order of the matrices: %d\n", order_matrices);
 
+    //results
+    double result [128]; //TODO change this here
+
+    // Allocate data for the matrices in question
     
+    int mat_index = 0;
 
-}
+    // This will ensure we will read the exact amount of bytes
+    // We are supposed to read
+    size_t data_size = order_matrices * order_matrices;
+    double data[data_size];
 
-static void process_file(const char *filename) {
-    
-    open_file (filename);
+    //int nr_matrices_processed = 0;
+    while (mat_index < n_matrices) {
 
-    //error on initialize
-    initialize(10);
+        
+
+        //lock
+        pthread_mutex_lock(&getMatrix);
+
+        //read data
+        fread(data, sizeof(double), data_size, filehandle) == data_size;
+
+        //unlock
+        pthread_mutex_unlock(&getMatrix);
+
+        double determinant = calculateMatrix(filehandle, order_matrices, data, mat_index, result);       
+
+        
+        //printf("Determinant for matrix %d is %11.3e.\n", mat_index, determinant);
+        mat_index++;
+    }
+
+    for (int i = 0; i < n_matrices; i++){
+        printf("Determinant for matrix %d is %11.3e.\n", i + 1 , result[i]);
+    }
+    fclose(filehandle);
+
+    printf ("\nElapsed time = %.6f s\n", elapsedTime);
 }
 
 
