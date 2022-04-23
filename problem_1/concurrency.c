@@ -186,7 +186,10 @@ bool get_data_portion(
 ) {
     lock_or_die(thread_id, &access_data_region);
 
-    if (n_files_processed == n_files) return false;
+    if (n_files_processed == n_files) {
+        unlock_or_die(thread_id, &access_data_region);
+        return false;
+    }
 
     // If the buffer isn't full, read everything in it and
     // swap to the next valid file.
