@@ -144,7 +144,7 @@ circular_buffer_t *c_b_swap_file(
 
     FILE *new_file;
 
-    if ((new_file == fopen(filename, "r")) == NULL) {
+    if ((new_file = fopen(filename, "r")) == NULL) {
         printf("Unable to open new file: %s\n", strerror(errno));
         return NULL;
     }

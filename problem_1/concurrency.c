@@ -4,13 +4,16 @@
 #include <string.h>
 #include <errno.h>
 #include <pthread.h>
+
 #include "concurrency.h"
+#include "filereader.h"
 
 /**
- * @brief 
+ * @brief Tells whether all threads were sucessful or not
  * 
  */
 static bool success = true;
+
 /**
  * @brief Number of threads to be processed. 
  * 
@@ -53,9 +56,14 @@ static size_t n_files_processed = 0;
  */
 static char **file_names = NULL;
 
+/**
+ * @brief Current file being processed
+ * 
+ */
+static circular_buffer_t *cb_file_reader = NULL;
 
 /**
- * @brief List of results for the each of the files 
+ * @brief Results for the each of the files 
  * 
  */
 static measurements *results = NULL;
@@ -122,8 +130,27 @@ static void reset_results(measurements *_results, size_t n_results) {
  * 
  */
 static void print_error_and_exit() {
-    fprintf(stderr, "Error while initializing threads status variable: %s\n", strerror(errno));
+    fprintf(stderr, "Error while initializing: %s\n", strerror(errno));
     exit(1);
+}
+
+/**
+ * @brief Switch to the next file if it's valid otherwise skip and repeat
+ * until a valid one is found or all files are processed.
+ * 
+ */
+static void swap_file() {
+    circular_buffer_t *new_cb_reader = NULL;
+
+    // While we don't reach the end of file names and we find a valid non empty file
+    // keep swaping files.
+    n_files_processed++;
+    while (n_files_processed < n_files) {
+        new_cb_reader = c_b_swap_file(cb_file_reader, file_names[n_files_processed]);
+
+        if (new_cb_reader != NULL && c_b_size(new_cb_reader) != 0) break; 
+        n_files_processed++;
+    }
 }
 
 //
@@ -145,13 +172,42 @@ void initialize(const size_t _n_files, char **_file_names, const size_t _n_threa
     if ((results = malloc(sizeof(measurements) * n_files)) == NULL) print_error_and_exit();
 
     reset_results(results, n_files);
+
+    cb_file_reader = c_b_open(file_names[n_files_processed], CHUNK_MAX_SIZE);
+
+    // If the file reader is invalid then swap until a valid one is found
+    if (cb_file_reader == NULL) swap_file();
 }
 
 
-bool get_data_portion(int thread_id, int *file_id_out, char *data_out, size_t *data_size_out) {
+bool get_data_portion(
+    int thread_id, int *file_id_out, 
+    unsigned char *data_out, size_t *data_size_out
+) {
     lock_or_die(thread_id, &access_data_region);
 
-    
+    if (n_files_processed == n_files) return false;
+
+    // If the buffer isn't full, read everything in it and
+    // swap to the next valid file.
+    if (c_b_size(cb_file_reader) != c_b_capacity(cb_file_reader)) {
+
+        *data_size_out = c_b_read_all(cb_file_reader, data_out);
+        *file_id_out = n_files_processed;
+        swap_file();
+
+        unlock_or_die(thread_id, &access_data_region);
+        return true;
+    }
+
+    // Try read a chunk with a certain minimun size and ending at a space character.
+    *data_size_out = c_b_read_chunk_until_delim(cb_file_reader, CHUNK_MIN_SIZE, ' ', data_out);
+    *file_id_out = n_files_processed;
+    // Fill the reader with more data.
+    c_b_fill(cb_file_reader);
+
+    // If the reader is empty swap to the next valid file
+    if (c_b_size(cb_file_reader) == 0) swap_file();
 
     unlock_or_die(thread_id, &access_data_region);
     return true;
@@ -182,8 +238,19 @@ void cleanup() {
     n_files_processed = 0;
     file_names = NULL;
 
-    free(threads_status);
-    free(results);
+    if (cb_file_reader != NULL) {
+        c_b_close(cb_file_reader);
+        cb_file_reader = NULL;
+    }
+
+    if (threads_status != NULL) {
+        free(threads_status);
+        threads_status = NULL;
+    }
+
+    if (results != NULL) {
+        free(results);
+    }
 }
 
 //
@@ -192,12 +259,22 @@ void cleanup() {
 //
 //
 
-#if 1
+#if 0
 
 void print_str_arr(char **strings, size_t n_strings) {
     for (size_t i = 0; i < n_strings; i++) {
         printf("%s\n", strings[i]);
     }
+}
+
+void print_str_and_size(int f_id, unsigned char *string, size_t string_size) {
+    printf("Portion from %s:", file_names[f_id]);
+
+    for (size_t i = 0; i < string_size; i++) {
+        putchar(string[i]);
+    }
+
+    putchar('\n');
 }
 
 void test_one() {
@@ -243,8 +320,42 @@ void test_one() {
     printf("Number of threads: %lu\n", n_threads);
 }
 
+void test_two() {
+    size_t files_count = 2;
+    size_t threads_count = 1;
+    char *names_of_files[] = {"./data/text0.txt", "./data/text1.txt"};
+
+    initialize(files_count, names_of_files, threads_count);
+
+    printf("After initialization\n");
+    printf("Number of files: %lu\n", n_files);
+    printf("Number of threads: %lu\n", n_threads);
+    print_str_arr(file_names, n_files);
+    printf("Thread status at idx 1: %d\n", threads_status[1]);
+    printf("Results at idx 1: \n");
+    printf("- n_words: %lu\n", results[1].n_words);
+    printf("- n_words_end_cons: %lu\n", results[1].n_words_end_cons);
+    printf("- n_words_start_vowel: %lu\n", results[1].n_words_start_vowel);
+
+    int t_id = 0;
+    int f_id = 0;
+    unsigned char data_buffer[CHUNK_MAX_SIZE];
+    size_t data_size = 0;
+
+    while (get_data_portion(t_id, &f_id, data_buffer, &data_size)) {
+        print_str_and_size(f_id, data_buffer, data_size);
+    }
+
+    cleanup();
+
+    printf("\nAfter cleanup\n");
+    printf("Number of files: %lu\n", n_files);
+    printf("Number of threads: %lu\n", n_threads);
+}
+
 int main(int argc, char *argv[]) {
-    test_one();
+    // test_one();
+    test_two();
 }
 
 #endif

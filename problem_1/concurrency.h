@@ -29,14 +29,14 @@ typedef struct measurements {
  * for get_data_portion()
  * 
  */
-#define EXPECTED_MINIMUM_READ_SIZE = 512;
+#define CHUNK_MIN_SIZE 512
 
 /**
- * @brief Advised size for the data output buffer used to get data from
+ * @brief Maximum amount of data read into the the data output buffer for
  * get_data_portion()
  * 
  */
-#define SUGGESTED_BUFFER_SIZE = EXPECTED_MINIMUM_READ_SIZE * 2;
+#define CHUNK_MAX_SIZE CHUNK_MIN_SIZE * 2
 
 /**
  * @brief Function used to initialize the shared region variables.
@@ -51,13 +51,16 @@ void initialize(const size_t n_files, char **file_names, const size_t n_threads)
 /**
  * @brief Get a portion of data for processing.
  * 
- * @param thread_id 
- * @param file_id_out 
- * @param data_out 
- * @param data_size_out 
+ * @param thread_id An application defined id for the thread (not the thread_t id).
+ * @param file_id_out An application defined id for the file the data belongs to.
+ * @param data_out Pointer to the buffer where the data will be store.
+ * @param data_size_out The amount of bytes copied into the buffer.
  * @return true if the thread should continue or false if it should exit.
  */
-bool get_data_portion(int thread_id, int *file_id_out, char *data_out, size_t *data_size_out);
+bool get_data_portion(
+    int thread_id, int *file_id_out, 
+    unsigned char *data_out, size_t *data_size_out
+);
 
 
 /**
