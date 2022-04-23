@@ -9,8 +9,17 @@
 #include <pthread.h>
 #include "matrix.h"
 
+struct info {
+    int prod;
+    int order_matrices;
+    FILE *filehandle;
+    int *statusProd;
+    int n_matrices;
+
+};
+
 //lock access to read a matrix
-static pthread_mutex_t getMatrix = PTHREAD_MUTEX_INITIALIZER;
+pthread_mutex_t getMatrix = PTHREAD_MUTEX_INITIALIZER;
 
 //lock access to add time
 static pthread_mutex_t addTime = PTHREAD_MUTEX_INITIALIZER;
@@ -20,6 +29,13 @@ static pthread_mutex_t addResult = PTHREAD_MUTEX_INITIALIZER;
 
 //elapsed time
 double elapsedTime;
+
+//results
+double *result;
+
+int nr_matrices_processed = 0;
+
+bool stillProcessing = true;
 
 
 
@@ -106,18 +122,89 @@ double calculateMatrix(FILE *filehandle, int order_matrices, double data[], int 
     //unlock
     pthread_mutex_unlock(&addTime);
 
-    //lock
-    pthread_mutex_lock(&addResult);
-
-    //add result
-    result [index] = determinant;
-
-    //unlock
-    pthread_mutex_unlock(&addResult);
-
-
-
     return determinant;
+}
+
+int process (FILE *filehandle, int order_matrices, int n_matrices, int id){
+
+    size_t data_size = order_matrices * order_matrices;
+    double data[data_size];
+    int index = -1;
+    double determinant = 0.0;
+        
+    pthread_mutex_lock(&getMatrix);
+    //read data
+    if (stillProcessing == true){
+        fread(data, sizeof(double), data_size, filehandle);
+        index = nr_matrices_processed;
+
+        nr_matrices_processed ++;
+    } else {
+        
+        //printf("error\n");
+    }
+
+    if (nr_matrices_processed >= n_matrices){
+         stillProcessing = false;
+    }
+    pthread_mutex_unlock(&getMatrix);
+
+    if (index != -1){
+
+        determinant = calculateMatrix(filehandle, order_matrices, data, index, result);
+        result [index] = determinant;
+   
+    //printf("det %f    %d  %d \n", determinant, index, id);
+        
+    //lock
+    //pthread_mutex_lock(&addResult); 
+    //read data
+        result [index] = determinant;
+    //unlock
+    //pthread_mutex_unlock(&addResult);
+    
+        return index;
+    }
+    return -1;
+}
+
+static void *producer (void *data)
+{
+    struct info *info = data;
+
+    int id = info->prod;                       /* producer id */
+
+
+    //life cycle
+
+    
+    
+
+    while(stillProcessing == true){
+
+        process(info->filehandle, info->order_matrices, info->n_matrices, id); 
+
+        //lock
+        /*pthread_mutex_lock(&getMatrix);
+        
+        if (nr_matrices_processed < info->n_matrices){
+
+        printf("nr -   %d %X\n", nr_matrices_processed, id);
+        nr_matrices_processed ++;
+
+        } else {
+            stillProcessing = false;
+        }
+
+        //unlock
+        pthread_mutex_unlock(&getMatrix);*/
+
+    } 
+    
+
+    info->statusProd[id] = EXIT_SUCCESS;
+    pthread_exit (&info->statusProd[id]);
+        
 }
 
 
@@ -134,11 +221,9 @@ static void process_file(const char *filename) {
         return;
     }
 
-    
-    
-
     printf("\n\n\nDeterminants for file '%s'\n\n", filename);
 
+    //get number of matrices and their order
     int n_matrices = 0;
     int order_matrices = 0;
 
@@ -151,37 +236,44 @@ static void process_file(const char *filename) {
     printf("Number of matrices: %d\n", n_matrices);
     printf("Order of the matrices: %d\n", order_matrices);
 
-    //results
-    double result [128]; //TODO change this here
+    /* generation of intervening entities threads */
+    int N = 10; //number of threads
 
-    // Allocate data for the matrices in question
-    
-    int mat_index = 0;
+    //allocate memory for results
+    result = malloc(sizeof(double) * n_matrices);
 
-    // This will ensure we will read the exact amount of bytes
-    // We are supposed to read
-    size_t data_size = order_matrices * order_matrices;
-    double data[data_size];
+    pthread_t tIdProd[N];
 
-    //int nr_matrices_processed = 0;
-    while (mat_index < n_matrices) {
+    //unsigned int prod[N];
+    int statusProd[N];
 
+    for (int i = 0; i < N; i++){
+        //prod[i] = i;
+   
+        struct info *info = malloc(sizeof(struct info));
+
+        info->prod = i;
+        info->order_matrices = order_matrices;
+        info->filehandle = filehandle;
+        info->statusProd = statusProd;        
+        info->n_matrices = n_matrices;
+
+
+        if (pthread_create (&tIdProd[i], NULL, producer, info) != 0)                              /* thread producer */
+        { perror ("error on creating thread producer");
+            exit (EXIT_FAILURE);
+        } else {
+            printf("created successfully! woo");
+        }
+    }
+
+    printf ("\nFinal report\n");
+    for (int i = 0; i < N; i++)
+    { if (pthread_join (tIdProd[i], (void *) &statusProd) != 0)                                       /* thread producer */
+        { perror ("error on waiting for thread producer");
+            exit (EXIT_FAILURE);
+        }
         
-
-        //lock
-        pthread_mutex_lock(&getMatrix);
-
-        //read data
-        fread(data, sizeof(double), data_size, filehandle) == data_size;
-
-        //unlock
-        pthread_mutex_unlock(&getMatrix);
-
-        double determinant = calculateMatrix(filehandle, order_matrices, data, mat_index, result);       
-
-        
-        //printf("Determinant for matrix %d is %11.3e.\n", mat_index, determinant);
-        mat_index++;
     }
 
     for (int i = 0; i < n_matrices; i++){
