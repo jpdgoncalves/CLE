@@ -1,18 +1,23 @@
-#include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <stdbool.h>
+
 #include <time.h>
+#include <getopt.h>
+#include <pthread.h>
+#include <string.h>
+#include <errno.h>
 
 #include "utf8iter.h"
 #include "utf8.h"
 #include "concurrency.h"
 
 
-void process_line(const char *data, const size_t data_size, measurements *out) {
+void process_line(const unsigned char *data, const size_t data_size, measurements *out) {
     uint32_t utf8_char = 0; // The current utf8 character.
     uint32_t prev_utf8_char = 0; // The previous utf8 character.
-    utf8iter iter = UTF8ITER((unsigned char*) data, data_size); // Iterator of utf8 characters.
+    utf8iter iter = UTF8ITER(data, data_size); // Iterator of utf8 characters.
     bool in_word = false; // Flag to detected whether we are inside a word or not.
     
     while (!UTF8ITER_REACHED_END(&iter)) {
@@ -41,62 +46,143 @@ void process_line(const char *data, const size_t data_size, measurements *out) {
 }
 
 
-int main(int argc, char **argv) {
+void *thread_procedure(void *thread_id_arg) {
+    int thread_id = *((int *) thread_id_arg);
+    int file_id;
+    size_t data_size;
+    unsigned char data[CHUNK_MAX_SIZE];
 
-    double t0, t1, t2;
-    t2 = 0.0;
+    printf("Thread %d has started\n", thread_id);
 
-    for (int i = 1; i < argc; i++) {
-        const char *filename = argv[i];
-        FILE *f = fopen(filename, "r");      
+    while (get_data_portion(thread_id, &file_id, data, &data_size)) {
+        measurements results = {0, 0, 0};
 
-        if (f == NULL) {
-            printf("Couldn't open file '%s'. Skipping\n", filename);
-            continue;
-        }
-
-        t0 = ((double) clock ()) / CLOCKS_PER_SEC;
-
-        
-
-
-        // Loop through the file one line at a time
-        // And for each line determine the number of words,
-        // the number of words the start with a vowel
-        // and the number of words that end with a consonant.
-        char *line_buffer = NULL;
-        size_t buffer_size = 0;
-        ssize_t line_size = 0;
-        measurements m = {0, 0, 0};
-        while( (line_size = getline(&line_buffer, &buffer_size, f)) != -1) {
-            process_line(line_buffer, (size_t) line_size, &m);
-        }
-
-        t1 = ((double) clock ()) / CLOCKS_PER_SEC;
-        t2 += t1 - t0;
-
-
-        free(line_buffer);
-        fclose(f);
-
-        printf("\nMeasurements for %s\n", filename);
-        printf("Number of words %lu\n", m.n_words);
-        printf("Number of words that start with vowel %lu\n", m.n_words_start_vowel);
-        printf("Number of words that start with consonant %lu\n", m.n_words_end_cons);
-
+        process_line(data, data_size, &results);
+        submit_results(thread_id, file_id, &results);
     }
 
-    printf ("\nElapsed time = %.6f s\n", t2);
+    printf("Thread %d has finished\n", thread_id);
 
-    // const char *str = "Por favor, eu quero ir para casa hoje! Tenho de ir á caça!!";
-    // size_t size = strlen(str);
-    // measurements m = {0, 0, 0};
-    
-    // process_line(str, size, &m);
+    return 0;
+}
 
-    // printf("Number of words %lu\n", m.n_words);
-    // printf("Number of words that start with vowel %lu\n", m.n_words_start_vowel);
-    // printf("Number of words that start with consonant %lu\n", m.n_words_end_cons);
+void program_usage(char *prog_path) {
+    printf("\nUSAGE: .%s -n<number_of_threads> <file_1> [file_n]...\n", strrchr(prog_path, '/'));
+    printf("-h\t\tPrints this message\n");
+    printf("-n\t\tSets the number of threads\n");
+}
+
+int main(int argc, char *argv[]) {
+    int opt;
+    int number_of_threads = 0;
+    char *prog_path = argv[0];
+
+    char *file_names[argc];
+    int number_of_files = 0;
+
+    if (argc == 1) {
+        printf("No arguments provided\n");
+        program_usage(prog_path);
+        return 1;
+    }
+
+    while ((opt = getopt(argc, argv, "-:n:h")) != -1) {
+        switch (opt) {
+            case 'h':
+                program_usage(prog_path);
+                return 0;
+            case 'n':
+                number_of_threads = atoi(optarg);
+                if (number_of_threads < 1) {
+                    printf("Option -n must be a number that isn't negative or decimal\n");
+                    program_usage(prog_path);
+                    return 1;
+                }
+                break;
+            case ':':
+                printf("Option -n requires an argument\n");
+                program_usage(prog_path);
+                return 1;
+            case '?':
+                printf("Unknown option: %c\n", optopt);
+                program_usage(prog_path);
+                return 1;
+            case 1:
+                file_names[number_of_files] = optarg;
+                number_of_files++;
+                break;
+        }
+    }
+
+    if (number_of_threads == 0) {
+        printf("Number of threads was not specified\n");
+        program_usage(prog_path);
+        return 1;
+    }
+
+    if (number_of_files == 0) {
+        printf("No files given for processing\n");
+        program_usage(prog_path);
+        return 1;
+    }
+
+    printf("Number of worker threads: %d\n", number_of_threads);
+    printf("Number of files for processing: %d\n", number_of_files);
+
+    //
+    // Beginning of the threaded code
+    //
+    pthread_t threads[number_of_threads];
+    int thread_ids[number_of_threads];
+
+    bool threads_success = false;
+    int *threads_status;
+    measurements *results;
+
+    initialize((size_t) number_of_files, file_names, (size_t) number_of_threads);
+
+    for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
+        thread_ids[thread_idx] = thread_idx;
+        if (pthread_create(&threads[thread_idx], NULL, thread_procedure, &thread_ids[thread_idx]) == -1) {
+            printf("Error creating thread %d: %s\n", thread_idx, strerror(errno));
+            return -1;
+        }
+    }
+
+    for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
+        if (pthread_join(threads[thread_idx], NULL) == -1) {
+            printf("Error joining thread %d: %s\n", thread_idx, strerror(errno));
+            return -1;
+        }
+    }
+
+    get_final_results(&threads_success, &threads_status, &results);
+
+    // If there was any thread errors print them and exit with failure status.
+    if (!threads_success) {
+        for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
+
+            if (threads_status[thread_idx] != 0) 
+                printf("Error at thread %d: %s\n", thread_idx, strerror(threads_status[thread_idx]));
+        }
+
+        return 1;
+    }
+
+    // Everything went smoothly. We can print the results
+    for (int file_idx = 0; file_idx < number_of_files; file_idx++) {
+        char *file_name = file_names[file_idx];
+        measurements result = results[file_idx];
+
+        printf("\nMeasurements for %s\n", file_name);
+        printf("Number of words %lu\n", result.n_words);
+        printf("Number of words that start with vowel %lu\n", result.n_words_start_vowel);
+        printf("Number of words that start with consonant %lu\n", result.n_words_end_cons);
+    }
+
+    cleanup();
+
+    printf("\nElapsed time = (TODO)\n");
 
     return 0;
 }
