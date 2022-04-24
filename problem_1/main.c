@@ -65,16 +65,12 @@ void *thread_procedure(void *thread_id_arg) {
     size_t data_size;
     unsigned char data[CHUNK_MAX_SIZE];
 
-    printf("Thread %d has started\n", thread_id);
-
     while (get_data_portion(thread_id, &file_id, data, &data_size)) {
         measurements results = {0, 0, 0};
 
         process_data(data, data_size, &results);
         submit_results(thread_id, file_id, &results);
     }
-
-    printf("Thread %d has finished\n", thread_id);
 
     return 0;
 }
@@ -154,8 +150,9 @@ int main(int argc, char *argv[]) {
     int *threads_status;
     measurements *results;
 
-    clock_gettime (CLOCK_MONOTONIC_RAW, &start); 
     initialize((size_t) number_of_files, file_names, (size_t) number_of_threads);
+
+    clock_gettime (CLOCK_MONOTONIC_RAW, &start);
 
     // Create and start the threads.
     for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
@@ -173,6 +170,8 @@ int main(int argc, char *argv[]) {
             return -1;
         }
     }
+
+    clock_gettime (CLOCK_MONOTONIC_RAW, &finish);
 
     get_final_results(&threads_success, &threads_status, &results);
 
@@ -198,10 +197,9 @@ int main(int argc, char *argv[]) {
         printf("Number of words that start with consonant %lu\n", result.n_words_end_cons);
     }
 
-    cleanup();
-    clock_gettime (CLOCK_MONOTONIC_RAW, &finish); 
+    cleanup(); 
 
-    printf ("\nElapsed tim = %.6f s\n",  (finish.tv_sec - start.tv_sec) / 1.0 + (finish.tv_nsec - start.tv_nsec) / 1000000000.0);
+    printf ("\nElapsed time = %.6f s\n",  (finish.tv_sec - start.tv_sec) / 1.0 + (finish.tv_nsec - start.tv_nsec) / 1000000000.0);
 
     return 0;
 }
