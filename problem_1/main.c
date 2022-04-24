@@ -191,10 +191,10 @@ int main(int argc, char *argv[]) {
         char *file_name = file_names[file_idx];
         measurements result = results[file_idx];
 
-        printf("\nMeasurements for %s\n", file_name);
-        printf("Number of words %lu\n", result.n_words);
-        printf("Number of words that start with vowel %lu\n", result.n_words_start_vowel);
-        printf("Number of words that start with consonant %lu\n", result.n_words_end_cons);
+        printf("\nFile name: %s\n", file_name);
+        printf("Number of words = %lu\n", result.n_words);
+        printf("Number of words that start with vowel = %lu\n", result.n_words_start_vowel);
+        printf("Number of words that start with consonant = %lu\n", result.n_words_end_cons);
     }
 
     cleanup(); 
