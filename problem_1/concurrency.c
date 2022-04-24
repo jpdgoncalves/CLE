@@ -102,7 +102,7 @@ static void unlock_or_die(int thread_id, pthread_mutex_t *mutex) {
 /**
  * @brief Resets the status of all threads to 0.
  * 
- * @param _threads_status The pointer to the status of the threads.
+ * @param _threads_status The pointer to the statuses of the threads.
  * @param _n_threads Number of threads.
  */
 static void reset_threads_status(int *_threads_status, size_t _n_threads) {
@@ -181,11 +181,12 @@ void initialize(const size_t _n_files, char **_file_names, const size_t _n_threa
 
 
 bool get_data_portion(
-    int thread_id, int *file_id_out, 
+    const int thread_id, int *file_id_out, 
     unsigned char *data_out, size_t *data_size_out
 ) {
     lock_or_die(thread_id, &access_data_region);
 
+    // If all of the files are processed simply exit
     if (n_files_processed == n_files) {
         unlock_or_die(thread_id, &access_data_region);
         return false;
@@ -203,13 +204,14 @@ bool get_data_portion(
         return true;
     }
 
-    // Try read a chunk with a certain minimun size and ending at a space character.
+    // Try read a chunk with at least a minimum size and ending at a space character.
     *data_size_out = c_b_read_chunk_until_delim(cb_file_reader, CHUNK_MIN_SIZE, ' ', data_out);
     *file_id_out = n_files_processed;
+
     // Fill the reader with more data.
     c_b_fill(cb_file_reader);
 
-    // If the reader is empty swap to the next valid file
+    // If the reader is empty, swap to the next valid file
     if (c_b_size(cb_file_reader) == 0) swap_file();
 
     unlock_or_die(thread_id, &access_data_region);
@@ -255,110 +257,3 @@ void cleanup() {
         free(results);
     }
 }
-
-//
-//
-// TEST CODE
-//
-//
-
-#if 0
-
-void print_str_arr(char **strings, size_t n_strings) {
-    for (size_t i = 0; i < n_strings; i++) {
-        printf("%s\n", strings[i]);
-    }
-}
-
-void print_str_and_size(int f_id, unsigned char *string, size_t string_size) {
-    printf("Portion from %s:", file_names[f_id]);
-
-    for (size_t i = 0; i < string_size; i++) {
-        putchar(string[i]);
-    }
-
-    putchar('\n');
-}
-
-void test_one() {
-    size_t _n_files = 4;
-    char *_file_names[] = {"hello.txt", "bye.txt", "bye_2.txt", "meh.txt"};
-    size_t _n_threads = 4;
-
-    initialize(_n_files, _file_names, _n_threads);
-
-    printf("After initialization\n");
-    printf("Number of files: %lu\n", n_files);
-    printf("Number of threads: %lu\n", n_threads);
-    print_str_arr(file_names, n_files);
-    printf("Thread status at idx 3: %d\n", threads_status[3]);
-    printf("Results at idx 3: \n");
-    printf("- n_words: %lu\n", results[3].n_words);
-    printf("- n_words_end_cons: %lu\n", results[3].n_words_end_cons);
-    printf("- n_words_start_vowel: %lu\n", results[3].n_words_start_vowel);
-
-    measurements interm_results = {3, 2, 1};
-
-    submit_results(3, 3, &interm_results);
-    submit_results(3, 3, &interm_results);
-    submit_results(3, 3, &interm_results);
-
-    bool was_sucessful = false;
-    int *threads_success;
-    measurements *operation_results;
-
-    get_final_results(&was_sucessful, &threads_success, &operation_results);
-    printf("\nGet results\n");
-    printf("Should be sucess: %s\n", was_sucessful ? "true" : "false");
-    printf("Thread status at idx 3: %d\n", threads_success[3]);
-    printf("Results at idx 3: \n");
-    printf("- n_words should be 9: %lu\n", operation_results[3].n_words);
-    printf("- n_words_end_cons should be 3: %lu\n", operation_results[3].n_words_end_cons);
-    printf("- n_words_start_vowel should be 6: %lu\n", operation_results[3].n_words_start_vowel);
-
-    cleanup();
-
-    printf("\nAfter cleanup\n");
-    printf("Number of files: %lu\n", n_files);
-    printf("Number of threads: %lu\n", n_threads);
-}
-
-void test_two() {
-    size_t files_count = 2;
-    size_t threads_count = 1;
-    char *names_of_files[] = {"./data/text0.txt", "./data/text1.txt"};
-
-    initialize(files_count, names_of_files, threads_count);
-
-    printf("After initialization\n");
-    printf("Number of files: %lu\n", n_files);
-    printf("Number of threads: %lu\n", n_threads);
-    print_str_arr(file_names, n_files);
-    printf("Thread status at idx 1: %d\n", threads_status[1]);
-    printf("Results at idx 1: \n");
-    printf("- n_words: %lu\n", results[1].n_words);
-    printf("- n_words_end_cons: %lu\n", results[1].n_words_end_cons);
-    printf("- n_words_start_vowel: %lu\n", results[1].n_words_start_vowel);
-
-    int t_id = 0;
-    int f_id = 0;
-    unsigned char data_buffer[CHUNK_MAX_SIZE];
-    size_t data_size = 0;
-
-    while (get_data_portion(t_id, &f_id, data_buffer, &data_size)) {
-        print_str_and_size(f_id, data_buffer, data_size);
-    }
-
-    cleanup();
-
-    printf("\nAfter cleanup\n");
-    printf("Number of files: %lu\n", n_files);
-    printf("Number of threads: %lu\n", n_threads);
-}
-
-int main(int argc, char *argv[]) {
-    // test_one();
-    test_two();
-}
-
-#endif

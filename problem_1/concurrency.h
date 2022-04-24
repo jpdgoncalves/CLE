@@ -49,33 +49,39 @@ void initialize(const size_t n_files, char **file_names, const size_t n_threads)
 
 
 /**
- * @brief Get a portion of data for processing.
+ * @brief Get a portion of data for processing. If the function
+ * returns false it means there wasn't anymore data to process and
+ * the thread should quit.
  * 
- * @param thread_id An application defined id for the thread (not the thread_t id).
- * @param file_id_out An application defined id for the file the data belongs to.
- * @param data_out Pointer to the buffer where the data will be store.
+ * @param thread_id The id of the thread.
+ * @param file_id_out Id of the file the portion of data belongs to.
+ * @param data_out Pointer to the buffer where the data will be stored.
  * @param data_size_out The amount of bytes copied into the buffer.
  * @return true if the thread should continue or false if it should exit.
  */
 bool get_data_portion(
-    int thread_id, int *file_id_out, 
+    const int thread_id, int *file_id_out, 
     unsigned char *data_out, size_t *data_size_out
 );
 
 
 /**
- * @brief Submit the results obtained after processing the data.
+ * @brief Submit the results obtained after processing a portion data
+ * of some file.
  * 
- * @param thread_id 
- * @param file_id 
- * @param results 
+ * @param thread_id The id of the thread.
+ * @param file_id The id of the file the processed data belonged to.
+ * @param results The results obtained from processing.
  */
-void submit_results( const int thread_id, const int file_id, const measurements *results);
+void submit_results(const int thread_id, const int file_id, const measurements *results);
 
 
 /**
  * @brief Get results from the processing including whether there were any errors and on which threads
  * 
+ * @param sucess_out If no threads had errors during their execution.
+ * @param threads_status_out The statuses of the threads. This is used to know which thread failed and why.
+ * @param results_out The measurements made for each of the files.
  */
 void get_final_results(bool *sucess_out, int **threads_status_out, measurements **results_out);
 

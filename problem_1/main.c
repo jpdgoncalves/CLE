@@ -13,8 +13,15 @@
 #include "utf8.h"
 #include "concurrency.h"
 
-
-void process_line(const unsigned char *data, const size_t data_size, measurements *out) {
+/**
+ * @brief Procedure to calculate the number of words, number of words starting with a vowel
+ * and number of words ending with a consonant.
+ * 
+ * @param data The text to process.
+ * @param data_size The size of the text in bytes.
+ * @param out Output of the measurements of the text provided.
+ */
+void process_data(const unsigned char *data, const size_t data_size, measurements *out) {
     uint32_t utf8_char = 0; // The current utf8 character.
     uint32_t prev_utf8_char = 0; // The previous utf8 character.
     utf8iter iter = UTF8ITER(data, data_size); // Iterator of utf8 characters.
@@ -46,6 +53,12 @@ void process_line(const unsigned char *data, const size_t data_size, measurement
 }
 
 
+/**
+ * @brief The procedure to be executed by the worker threads.
+ * 
+ * @param thread_id_arg An application defined id for the thread.
+ * @return void* 
+ */
 void *thread_procedure(void *thread_id_arg) {
     int thread_id = *((int *) thread_id_arg);
     int file_id;
@@ -57,7 +70,7 @@ void *thread_procedure(void *thread_id_arg) {
     while (get_data_portion(thread_id, &file_id, data, &data_size)) {
         measurements results = {0, 0, 0};
 
-        process_line(data, data_size, &results);
+        process_data(data, data_size, &results);
         submit_results(thread_id, file_id, &results);
     }
 
@@ -65,6 +78,7 @@ void *thread_procedure(void *thread_id_arg) {
 
     return 0;
 }
+
 
 void program_usage(char *prog_path) {
     printf("\nUSAGE: .%s -n<number_of_threads> <file_1> [file_n]...\n", strrchr(prog_path, '/'));
@@ -143,6 +157,7 @@ int main(int argc, char *argv[]) {
     clock_gettime (CLOCK_MONOTONIC_RAW, &start); 
     initialize((size_t) number_of_files, file_names, (size_t) number_of_threads);
 
+    // Create and start the threads.
     for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
         thread_ids[thread_idx] = thread_idx;
         if (pthread_create(&threads[thread_idx], NULL, thread_procedure, &thread_ids[thread_idx]) == -1) {
@@ -151,6 +166,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
+    // Wait for the threads to finish.
     for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
         if (pthread_join(threads[thread_idx], NULL) == -1) {
             printf("Error joining thread %d: %s\n", thread_idx, strerror(errno));
@@ -160,7 +176,7 @@ int main(int argc, char *argv[]) {
 
     get_final_results(&threads_success, &threads_status, &results);
 
-    // If there was any thread errors print them and exit with failure status.
+    // If there were any thread errors print them and exit with failure status.
     if (!threads_success) {
         for (int thread_idx = 0; thread_idx < number_of_threads; thread_idx++) {
 
