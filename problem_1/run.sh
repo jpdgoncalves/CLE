@@ -19,7 +19,7 @@ do
 done
 
 
-printf "\n\n\n> 10 RUNS 4 THREAD\n" >> results.txt
+printf "\n\n\n> 10 RUNS 4 THREADS\n" >> results.txt
 for n in {1..10}
 do
     printf "\n\n> RUN ${n}\n\n" >> results.txt
