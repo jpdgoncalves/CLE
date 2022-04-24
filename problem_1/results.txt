@@ -31,7 +31,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004395 s
+Elapsed time = 0.004577 s
 
 
 > RUN 2
@@ -64,7 +64,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004370 s
+Elapsed time = 0.004392 s
 
 
 > RUN 3
@@ -97,7 +97,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004391 s
+Elapsed time = 0.004642 s
 
 
 > RUN 4
@@ -130,7 +130,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004400 s
+Elapsed time = 0.004345 s
 
 
 > RUN 5
@@ -163,7 +163,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004403 s
+Elapsed time = 0.004349 s
 
 
 > RUN 6
@@ -196,7 +196,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004415 s
+Elapsed time = 0.004320 s
 
 
 > RUN 7
@@ -229,7 +229,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004318 s
+Elapsed time = 0.004299 s
 
 
 > RUN 8
@@ -262,7 +262,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004577 s
+Elapsed time = 0.004384 s
 
 
 > RUN 9
@@ -295,7 +295,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004380 s
+Elapsed time = 0.004574 s
 
 
 > RUN 10
@@ -328,7 +328,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004368 s
+Elapsed time = 0.004339 s
 
 
 
@@ -365,7 +365,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004388 s
+Elapsed time = 0.004466 s
 
 
 > RUN 2
@@ -398,7 +398,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004348 s
+Elapsed time = 0.004549 s
 
 
 > RUN 3
@@ -431,7 +431,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004873 s
+Elapsed time = 0.004335 s
 
 
 > RUN 4
@@ -464,7 +464,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004354 s
+Elapsed time = 0.004538 s
 
 
 > RUN 5
@@ -497,7 +497,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004928 s
+Elapsed time = 0.004381 s
 
 
 > RUN 6
@@ -530,7 +530,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004396 s
+Elapsed time = 0.004478 s
 
 
 > RUN 7
@@ -563,7 +563,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004368 s
+Elapsed time = 0.004446 s
 
 
 > RUN 8
@@ -596,7 +596,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004358 s
+Elapsed time = 0.004345 s
 
 
 > RUN 9
@@ -629,7 +629,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004358 s
+Elapsed time = 0.004648 s
 
 
 > RUN 10
@@ -662,7 +662,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004380 s
+Elapsed time = 0.004366 s
 
 
 
@@ -699,7 +699,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004449 s
+Elapsed time = 0.005221 s
 
 
 > RUN 2
@@ -732,7 +732,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004578 s
+Elapsed time = 0.004433 s
 
 
 > RUN 3
@@ -765,7 +765,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004383 s
+Elapsed time = 0.004367 s
 
 
 > RUN 4
@@ -798,7 +798,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004578 s
+Elapsed time = 0.004652 s
 
 
 > RUN 5
@@ -831,7 +831,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004377 s
+Elapsed time = 0.004399 s
 
 
 > RUN 6
@@ -864,7 +864,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004448 s
+Elapsed time = 0.005304 s
 
 
 > RUN 7
@@ -897,7 +897,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004459 s
+Elapsed time = 0.004470 s
 
 
 > RUN 8
@@ -930,7 +930,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004497 s
+Elapsed time = 0.004668 s
 
 
 > RUN 9
@@ -963,7 +963,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004606 s
+Elapsed time = 0.004457 s
 
 
 > RUN 10
@@ -996,7 +996,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004436 s
+Elapsed time = 0.004558 s
 
 
 
@@ -1033,7 +1033,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004526 s
+Elapsed time = 0.004533 s
 
 
 > RUN 2
@@ -1066,7 +1066,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004791 s
+Elapsed time = 0.004924 s
 
 
 > RUN 3
@@ -1099,7 +1099,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004673 s
+Elapsed time = 0.004517 s
 
 
 > RUN 4
@@ -1132,7 +1132,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004515 s
+Elapsed time = 0.004495 s
 
 
 > RUN 5
@@ -1165,7 +1165,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004487 s
+Elapsed time = 0.004511 s
 
 
 > RUN 6
@@ -1198,7 +1198,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004476 s
+Elapsed time = 0.004462 s
 
 
 > RUN 7
@@ -1231,7 +1231,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004481 s
+Elapsed time = 0.004517 s
 
 
 > RUN 8
@@ -1264,7 +1264,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004956 s
+Elapsed time = 0.004521 s
 
 
 > RUN 9
@@ -1297,7 +1297,7 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004528 s
+Elapsed time = 0.005944 s
 
 
 > RUN 10
@@ -1330,4 +1330,4 @@ Number of words = 9914
 Number of words that start with vowel = 3095
 Number of words that start with consonant = 3175
 
-Elapsed time = 0.004729 s
+Elapsed time = 0.004523 s
