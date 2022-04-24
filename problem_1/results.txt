@@ -1,0 +1,1333 @@
+> 10 RUNS 1 THREAD
+
+
+> RUN 1
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004427 s
+
+
+> RUN 2
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004452 s
+
+
+> RUN 3
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004254 s
+
+
+> RUN 4
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004290 s
+
+
+> RUN 5
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004251 s
+
+
+> RUN 6
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004271 s
+
+
+> RUN 7
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004265 s
+
+
+> RUN 8
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004251 s
+
+
+> RUN 9
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004481 s
+
+
+> RUN 10
+
+Number of worker threads: 1
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004260 s
+
+
+
+> 10 RUNS 2 THREADS
+
+
+> RUN 1
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004611 s
+
+
+> RUN 2
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004267 s
+
+
+> RUN 3
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.005145 s
+
+
+> RUN 4
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004283 s
+
+
+> RUN 5
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004495 s
+
+
+> RUN 6
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.005076 s
+
+
+> RUN 7
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004327 s
+
+
+> RUN 8
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004286 s
+
+
+> RUN 9
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004275 s
+
+
+> RUN 10
+
+Number of worker threads: 2
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004852 s
+
+
+
+> 10 RUNS 4 THREAD
+
+
+> RUN 1
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004308 s
+
+
+> RUN 2
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004563 s
+
+
+> RUN 3
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004329 s
+
+
+> RUN 4
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004777 s
+
+
+> RUN 5
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004323 s
+
+
+> RUN 6
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004520 s
+
+
+> RUN 7
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004349 s
+
+
+> RUN 8
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004347 s
+
+
+> RUN 9
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004343 s
+
+
+> RUN 10
+
+Number of worker threads: 4
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004396 s
+
+
+
+> 10 RUNS 8 THREADS
+
+
+> RUN 1
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004527 s
+
+
+> RUN 2
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004492 s
+
+
+> RUN 3
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004433 s
+
+
+> RUN 4
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004406 s
+
+
+> RUN 5
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004523 s
+
+
+> RUN 6
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004425 s
+
+
+> RUN 7
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004700 s
+
+
+> RUN 8
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004632 s
+
+
+> RUN 9
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004408 s
+
+
+> RUN 10
+
+Number of worker threads: 8
+Number of files for processing: 5
+
+File name: ./data/text0.txt
+Number of words = 14
+Number of words that start with vowel = 10
+Number of words that start with consonant = 4
+
+File name: ./data/text1.txt
+Number of words = 1184
+Number of words that start with vowel = 381
+Number of words that start with consonant = 365
+
+File name: ./data/text2.txt
+Number of words = 11027
+Number of words that start with vowel = 3648
+Number of words that start with consonant = 3220
+
+File name: ./data/text3.txt
+Number of words = 3369
+Number of words that start with vowel = 1004
+Number of words that start with consonant = 1054
+
+File name: ./data/text4.txt
+Number of words = 9914
+Number of words that start with vowel = 3095
+Number of words that start with consonant = 3175
+
+Elapsed time = 0.004708 s
